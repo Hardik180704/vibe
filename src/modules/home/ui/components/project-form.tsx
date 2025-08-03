@@ -10,6 +10,7 @@ import { ArrowUpIcon, Loader2Icon } from "lucide-react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { cn } from "@/lib/utils";
 import { useTRPC } from "@/trpc/client";
+import {useClerk} from "@clerk/nextjs";
 import { Button } from "@/components/ui/button";
 import { Form, FormField } from "@/components/ui/form";
 import { useRouter } from "next/navigation";
@@ -25,6 +26,7 @@ const formSchema = z.object({
 export const ProjectForm = () => {
     const router = useRouter();
     const trpc = useTRPC();
+    const clerk = useClerk();
     const queryClient = useQueryClient();
     const form = useForm<z.infer<typeof formSchema>>({
         resolver: zodResolver(formSchema),
@@ -42,8 +44,10 @@ export const ProjectForm = () => {
             // TODO: Invalidate Usage Status
         },
         onError: (error) => {
-            // TODO: Redirect to pricing page if specific error 
             toast.error(error.message);
+            if (error.data?.code === "UNAUTHORIZED") {
+                clerk.openSignIn();
+            }
         },
     }));
 
