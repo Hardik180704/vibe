@@ -5,7 +5,6 @@ import { inngest } from "./client";
 import { getSandbox, lastAssistantTextMessageContent } from "./utils";
 import { FRAGMENT_TITLE_PROMPT, PROMPT, RESPONSE_PROMPT } from "@/prompt";
 import { prisma } from "@/lib/db";
-import { isArray } from "util";
 import { SANDBOX_TIMEOUT } from "./types";
 
 interface AgentState {
@@ -70,7 +69,7 @@ export const codeAgentFunction = inngest.createFunction(
           description: "Use the terminal to run commands",
           parameters: z.object({
             command: z.string(),
-          }) as any,
+          }),
           handler: async ({ command }, { step }) => {
             return await step?.run("run-terminal-command", async () => {
               const buffers = { stdout: "", stderr: "" };

@@ -35,7 +35,7 @@ const FileBreadcrumb = ({ filePath }: FileBreadcrumbProps) => {
   const pathSegments = filePath.split("/");
   const maxSegments = 3;
   
-  const renderBreadcrumbItems = (segment: string, index: number) => {
+  const renderBreadcrumbItems = () => {
     if (pathSegments.length <= maxSegments) {
       return pathSegments.map((segment, index) => {
         const isLast = index === pathSegments.length - 1;
@@ -84,7 +84,7 @@ const FileBreadcrumb = ({ filePath }: FileBreadcrumbProps) => {
   return (
     <Breadcrumb>
       <BreadcrumbList>
-        {renderBreadcrumbItems( filePath, 0 )}
+        {renderBreadcrumbItems()}
       </BreadcrumbList>
     </Breadcrumb>
   )
