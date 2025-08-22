@@ -2,7 +2,7 @@
 
 import { z } from "zod";
 import { toast } from "sonner";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import TextareaAutosize from "react-textarea-autosize";
@@ -56,7 +56,6 @@ export const ProjectForm = () => {
                 trpc.projects.getMany.queryOptions(),
             );
             router.push(`/projects/${data.id}`);
-            // TODO: Invalidate Usage Status
         },
         onError: (error) => {
             toast.error(error.message);
@@ -86,29 +85,28 @@ export const ProjectForm = () => {
     return (
         <Form {...form}>
             <motion.section 
-                className="space-y-8"
+                className="space-y-6 sm:space-y-8"
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8 }}
             >
-                {/* Premium form container */}
+                {/* Responsive form container */}
                 <motion.form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className={cn(
-                        "relative border-2 p-8 rounded-2xl transition-all duration-500 ease-out overflow-hidden",
+                        "relative border-2 p-4 sm:p-6 md:p-8 rounded-xl sm:rounded-2xl transition-all duration-500 ease-out overflow-hidden",
                         "glass-premium-dark shadow-luxury",
                         "bg-gradient-to-br from-white/5 to-white/[0.02] dark:from-white/10 dark:to-white/[0.02]",
-                        isFocused 
-                            ? "border-luxury shadow-glow-premium scale-[1.01]" 
-                            : "border-premium hover:border-luxury hover:shadow-glow-premium hover:scale-[1.005]"
+                        isFocused
+                            ? "border-indigo-400/40 shadow-glow-premium"
+                            : "border-white/20 hover:border-white/30"
                     )}
-                    initial={{ scale: 0.98, opacity: 0 }}
-                    animate={{ scale: 1, opacity: 1 }}
-                    transition={{ duration: 0.6, delay: 0.2 }}
+                    whileHover={{ scale: 1.01 }}
+                    transition={{ duration: 0.2 }}
                 >
-                    {/* Simple background gradient */}
+                    {/* Animated background gradient */}
                     <motion.div
-                        className="absolute inset-0 bg-gradient-to-r from-violet-500/3 via-purple-500/3 to-pink-500/3 -z-10 rounded-2xl"
+                        className="absolute inset-0 bg-gradient-to-r from-violet-500/3 via-purple-500/3 to-pink-500/3 -z-10 rounded-xl sm:rounded-2xl"
                         animate={{
                             opacity: [0.5, 0.8, 0.5],
                         }}
@@ -156,21 +154,23 @@ export const ProjectForm = () => {
                                         field.onChange(e);
                                         setCharCount(e.target.value.length);
                                     }}
-                                    minRows={3}
-                                    maxRows={8}
-                                    className={cn(
-                                        "w-full resize-none border-none outline-none bg-transparent relative z-10",
-                                        "text-lg placeholder:text-muted-foreground/60 placeholder:font-medium",
-                                        "font-medium leading-relaxed py-2 transition-all duration-300",
-                                        isFocused && "text-shadow-glow"
-                                    )}
-                                    placeholder="✨ Describe your dream website and watch the magic happen..."
                                     onKeyDown={(e) => {
                                         if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) {
                                             e.preventDefault();
                                             form.handleSubmit(onSubmit)(e);
                                         }
                                     }}
+                                    minRows={3}
+                                    maxRows={8}
+                                    className={cn(
+                                        "w-full resize-none rounded-lg border-0 bg-transparent",
+                                        "text-sm sm:text-base leading-relaxed",
+                                        "placeholder:text-gray-400 dark:placeholder:text-gray-500",
+                                        "focus:outline-none focus:ring-0",
+                                        "p-4 sm:p-6",
+                                        "transition-all duration-300"
+                                    )}
+                                    placeholder="Describe what you want to build... (e.g., 'A modern portfolio website with dark mode and animations')"
                                 />
 
                                 {/* Character counter with animation */}
@@ -191,7 +191,7 @@ export const ProjectForm = () => {
                                 <AnimatePresence>
                                     {showSuggestions && field.value.length < 5 && (
                                         <motion.div
-                                            className="absolute top-full left-0 right-0 mt-2 bg-black/90 backdrop-blur-xl border border-white/20 rounded-2xl p-4 z-50"
+                                            className="absolute top-full left-0 right-0 mt-2 bg-black/90 backdrop-blur-xl border border-white/20 rounded-xl sm:rounded-2xl p-3 sm:p-4 z-50"
                                             initial={{ opacity: 0, y: -10, scale: 0.95 }}
                                             animate={{ opacity: 1, y: 0, scale: 1 }}
                                             exit={{ opacity: 0, y: -10, scale: 0.95 }}
@@ -210,14 +210,14 @@ export const ProjectForm = () => {
                                                             onSelect(suggestion);
                                                             setShowSuggestions(false);
                                                         }}
-                                                        className="w-full text-left p-3 rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-indigo-400/30 transition-all duration-200 group"
+                                                        className="w-full text-left p-2 sm:p-3 rounded-lg sm:rounded-xl bg-white/5 hover:bg-white/10 border border-white/10 hover:border-indigo-400/30 transition-all duration-200 group"
                                                         whileHover={{ scale: 1.02, x: 4 }}
                                                         whileTap={{ scale: 0.98 }}
                                                         initial={{ opacity: 0, x: -20 }}
                                                         animate={{ opacity: 1, x: 0 }}
                                                         transition={{ delay: index * 0.1 }}
                                                     >
-                                                        <span className="text-sm text-white/70 group-hover:text-white/90 transition-colors">
+                                                        <span className="text-xs sm:text-sm text-white/70 group-hover:text-white/90 transition-colors">
                                                             {suggestion}
                                                         </span>
                                                     </motion.button>
@@ -226,45 +226,34 @@ export const ProjectForm = () => {
                                         </motion.div>
                                     )}
                                 </AnimatePresence>
-                                
-                                {/* Enhanced premium focus glow */}
-                                <AnimatePresence>
-                                    {isFocused && (
-                                        <motion.div
-                                            className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 rounded-lg blur-xl -z-10"
-                                            initial={{ opacity: 0, scale: 0.8 }}
-                                            animate={{ opacity: 1, scale: 1.1 }}
-                                            exit={{ opacity: 0, scale: 0.8 }}
-                                            transition={{ duration: 0.3 }}
-                                        />
-                                    )}
-                                </AnimatePresence>
                             </motion.div>
                         )} 
                     />
                     
-                    <div className="flex gap-x-4 items-end justify-between pt-6 border-t border-white/10 mt-6">
+                    <div className="flex flex-col sm:flex-row gap-4 sm:gap-x-4 items-start sm:items-end justify-between pt-4 sm:pt-6 border-t border-white/10 mt-4 sm:mt-6">
                         <motion.div 
-                            className="text-xs text-muted-foreground/80 font-medium flex items-center gap-2"
+                            className="text-xs text-muted-foreground/80 font-medium flex items-center gap-2 order-2 sm:order-1"
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.4 }}
                         >
                             <SparklesIcon className="w-3 h-3" />
                             <kbd className="inline-flex h-6 select-none items-center gap-1 rounded-md border border-white/20 bg-white/5 px-2 font-mono text-xs font-medium backdrop-blur-sm">
-                                <span>⌘</span>Enter
+                                <span className="hidden sm:inline">⌘</span>Enter
                             </kbd>
-                            <span>to create magic</span>
+                            <span className="hidden sm:inline">to create magic</span>
+                            <span className="sm:hidden">to submit</span>
                         </motion.div>
                         
                         <motion.div
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
+                            className="order-1 sm:order-2 self-end sm:self-auto"
                         >
                             <Button
                                 disabled={isButtonDisabled}
                                 className={cn(
-                                    "w-12 h-12 rounded-full relative overflow-hidden transition-all duration-300",
+                                    "w-12 h-12 sm:w-12 sm:h-12 rounded-full relative overflow-hidden transition-all duration-300 min-h-[44px] min-w-[44px]",
                                     !isButtonDisabled 
                                         ? "bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 shadow-lg hover:shadow-xl hover:shadow-purple-500/25" 
                                         : "bg-muted/50 border border-muted"
@@ -280,45 +269,30 @@ export const ProjectForm = () => {
                     </div>
                 </motion.form>
                 
-                {/* Premium template buttons */}
+                {/* Responsive template buttons */}
                 <motion.div 
-                    className="flex-wrap justify-center gap-3 hidden md:flex max-w-4xl mx-auto"
+                    className="flex flex-wrap justify-center gap-2 sm:gap-3 max-w-4xl mx-auto"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
                 >
                   {PROJECT_TEMPLATES.map((template, index) => (
-                    <motion.div
-                        key={template.title}
-                        initial={{ opacity: 0, scale: 0.9 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ delay: 0.5 + index * 0.1 }}
-                        whileHover={{ scale: 1.05, y: -2 }}
-                        whileTap={{ scale: 0.95 }}
+                    <motion.button
+                      key={index}
+                      type="button"
+                      onClick={() => onSelect(template.prompt)}
+                      className="px-3 sm:px-4 py-2 text-xs sm:text-sm bg-white/5 hover:bg-white/10 border border-white/20 hover:border-indigo-400/30 rounded-full transition-all duration-200 text-white/70 hover:text-white/90 min-h-[36px] sm:min-h-[32px]"
+                      whileHover={{ scale: 1.05, y: -2 }}
+                      whileTap={{ scale: 0.95 }}
+                      initial={{ opacity: 0, y: 20 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 0.6 + index * 0.1 }}
                     >
-                        <Button
-                            variant="outline"
-                            size="sm"
-                            className={cn(
-                                "relative overflow-hidden border-2 transition-all duration-300",
-                                "glass-premium-dark hover:glass-premium hover:border-luxury",
-                                "hover:shadow-glow-premium hover:shadow-lg",
-                                "bg-white/5 hover:bg-white/10 dark:bg-white/5 dark:hover:bg-white/10"
-                            )}
-                            onClick={() => onSelect(template.prompt)}
-                        >
-                            <motion.div
-                                className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 opacity-0 hover:opacity-100 transition-opacity duration-300"
-                            />
-                            <span className="relative z-10 flex items-center gap-2 font-medium">
-                                <span className="text-lg">{template.emoji}</span>
-                                {template.title}
-                            </span>
-                        </Button>
-                    </motion.div>
+                      {template.emoji} {template.title}
+                    </motion.button>
                   ))}
                 </motion.div>
             </motion.section>
         </Form>
-    )
-}
+    );
+};
