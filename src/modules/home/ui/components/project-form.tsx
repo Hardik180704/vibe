@@ -95,7 +95,7 @@ export const ProjectForm = () => {
                 <motion.form
                     onSubmit={form.handleSubmit(onSubmit)}
                     className={cn(
-                        "relative border-2 p-8 rounded-2xl transition-all duration-500 ease-out overflow-hidden",
+                        "relative border-2 p-4 sm:p-6 md:p-8 rounded-2xl transition-all duration-500 ease-out overflow-hidden",
                         "glass-premium-dark shadow-luxury",
                         "bg-gradient-to-br from-white/5 to-white/[0.02] dark:from-white/10 dark:to-white/[0.02]",
                         isFocused 
@@ -160,7 +160,7 @@ export const ProjectForm = () => {
                                     maxRows={8}
                                     className={cn(
                                         "w-full resize-none border-none outline-none bg-transparent relative z-10",
-                                        "text-lg placeholder:text-muted-foreground/60 placeholder:font-medium",
+                                        "text-base sm:text-lg placeholder:text-muted-foreground/60 placeholder:font-medium",
                                         "font-medium leading-relaxed py-2 transition-all duration-300",
                                         isFocused && "text-shadow-glow"
                                     )}
@@ -243,37 +243,39 @@ export const ProjectForm = () => {
                         )} 
                     />
                     
-                    <div className="flex gap-x-4 items-end justify-between pt-6 border-t border-white/10 mt-6">
+                    <div className="flex flex-col sm:flex-row gap-3 sm:gap-x-4 items-start sm:items-end justify-between pt-4 sm:pt-6 border-t border-white/10 mt-4 sm:mt-6">
                         <motion.div 
-                            className="text-xs text-muted-foreground/80 font-medium flex items-center gap-2"
+                            className="text-xs text-muted-foreground/80 font-medium flex items-center gap-2 order-2 sm:order-1"
                             initial={{ opacity: 0, x: -10 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.4 }}
                         >
                             <SparklesIcon className="w-3 h-3" />
-                            <kbd className="inline-flex h-6 select-none items-center gap-1 rounded-md border border-white/20 bg-white/5 px-2 font-mono text-xs font-medium backdrop-blur-sm">
+                            <kbd className="inline-flex h-5 sm:h-6 select-none items-center gap-1 rounded-md border border-white/20 bg-white/5 px-1 sm:px-2 font-mono text-xs font-medium backdrop-blur-sm">
                                 <span>⌘</span>Enter
                             </kbd>
-                            <span>to create magic</span>
+                            <span className="hidden sm:inline">to create magic</span>
+                            <span className="sm:hidden">to create</span>
                         </motion.div>
                         
                         <motion.div
+                            className="order-1 sm:order-2 self-end"
                             whileHover={{ scale: 1.05 }}
                             whileTap={{ scale: 0.95 }}
                         >
                             <Button
                                 disabled={isButtonDisabled}
                                 className={cn(
-                                    "w-12 h-12 rounded-full relative overflow-hidden transition-all duration-300",
+                                    "w-10 h-10 sm:w-12 sm:h-12 rounded-full relative overflow-hidden transition-all duration-300",
                                     !isButtonDisabled 
                                         ? "bg-gradient-to-r from-indigo-500 to-purple-500 hover:from-indigo-600 hover:to-purple-600 shadow-lg hover:shadow-xl hover:shadow-purple-500/25" 
                                         : "bg-muted/50 border border-muted"
                                 )}
                             >
                                 {isPending ? (
-                                    <Loader2Icon className="w-5 h-5 animate-spin text-white" />
+                                    <Loader2Icon className="w-4 h-4 sm:w-5 sm:h-5 animate-spin text-white" />
                                 ) : (
-                                    <ArrowUpIcon className="w-5 h-5 text-white" />
+                                    <ArrowUpIcon className="w-4 h-4 sm:w-5 sm:h-5 text-white" />
                                 )}
                             </Button>
                         </motion.div>
@@ -282,7 +284,7 @@ export const ProjectForm = () => {
                 
                 {/* Premium template buttons */}
                 <motion.div 
-                    className="flex-wrap justify-center gap-3 hidden md:flex max-w-4xl mx-auto"
+                    className="flex-wrap justify-center gap-2 sm:gap-3 flex sm:hidden md:flex max-w-4xl mx-auto"
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6, delay: 0.4 }}
@@ -303,16 +305,18 @@ export const ProjectForm = () => {
                                 "relative overflow-hidden border-2 transition-all duration-300",
                                 "glass-premium-dark hover:glass-premium hover:border-luxury",
                                 "hover:shadow-glow-premium hover:shadow-lg",
-                                "bg-white/5 hover:bg-white/10 dark:bg-white/5 dark:hover:bg-white/10"
+                                "bg-white/5 hover:bg-white/10 dark:bg-white/5 dark:hover:bg-white/10",
+                                "text-xs sm:text-sm px-2 sm:px-3 py-1 sm:py-2"
                             )}
                             onClick={() => onSelect(template.prompt)}
                         >
                             <motion.div
                                 className="absolute inset-0 bg-gradient-to-r from-indigo-500/10 to-purple-500/10 opacity-0 hover:opacity-100 transition-opacity duration-300"
                             />
-                            <span className="relative z-10 flex items-center gap-2 font-medium">
-                                <span className="text-lg">{template.emoji}</span>
-                                {template.title}
+                            <span className="relative z-10 flex items-center gap-1 sm:gap-2 font-medium">
+                                <span className="text-base sm:text-lg">{template.emoji}</span>
+                                <span className="hidden sm:inline">{template.title}</span>
+                                <span className="sm:hidden text-xs">{template.title.split(' ')[0]}</span>
                             </span>
                         </Button>
                     </motion.div>

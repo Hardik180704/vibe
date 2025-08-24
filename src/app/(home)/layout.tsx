@@ -41,7 +41,7 @@ const Layout = ({ children }: Props) => {
                 { cx: 20, cy: 60 }, { cx: 100, cy: 60 }
               ].map((node, i) => (
                 <motion.circle
-                  key={i}
+                  key={`node-${node.cx}-${node.cy}-${i}`}
                   cx={node.cx} cy={node.cy} r="1.5"
                   fill="url(#nodeGradient)"
                   animate={{

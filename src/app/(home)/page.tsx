@@ -7,10 +7,10 @@ import Image from "next/image";
 
 const Page = () => {
   return (
-    <div className="flex flex-col max-w-5xl mx-auto w-full relative">
+    <div className="flex flex-col max-w-5xl mx-auto w-full relative px-4 sm:px-6">
       {/* Optimized Hero Section - Reduced animations for better performance */}
       <motion.section 
-        className="relative space-y-12 py-[20vh] 2xl:py-56 overflow-hidden"
+        className="relative space-y-8 sm:space-y-12 py-[15vh] sm:py-[20vh] 2xl:py-56 overflow-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
@@ -31,7 +31,7 @@ const Page = () => {
 
         {/* Minimal floating elements - Reduced for performance */}
         <motion.div
-          className="absolute top-20 right-20 w-2 h-2 bg-purple-400/30 rounded-full"
+          className="absolute top-16 sm:top-20 right-8 sm:right-20 w-2 h-2 bg-purple-400/30 rounded-full"
           animate={{
             y: [0, -15, 0],
             opacity: [0.3, 0.6, 0.3],
@@ -44,7 +44,7 @@ const Page = () => {
         />
         
         <motion.div
-          className="absolute bottom-32 left-16 w-1.5 h-1.5 bg-blue-400/20 rounded-full"
+          className="absolute bottom-20 sm:bottom-32 left-8 sm:left-16 w-1.5 h-1.5 bg-blue-400/20 rounded-full"
           animate={{
             y: [0, 10, 0],
             opacity: [0.2, 0.5, 0.2],
@@ -86,15 +86,15 @@ const Page = () => {
 
         {/* Optimized main heading */}
         <motion.h1 
-          className="text-4xl md:text-7xl font-black text-center leading-[0.9] tracking-tight"
+          className="text-3xl sm:text-4xl md:text-7xl font-black text-center leading-[0.9] tracking-tight"
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.6, delay: 0.4 }}
         >
           {/* Premium "Build Something" with enhanced effects */}
-          <motion.div className="relative mb-3">
+          <motion.div className="relative mb-2 sm:mb-3">
             <motion.span
-              className="relative inline-block text-6xl md:text-8xl font-black tracking-tight"
+              className="relative inline-block text-4xl sm:text-6xl md:text-8xl font-black tracking-tight"
               style={{
                 background: `linear-gradient(135deg, 
                   #667eea 0%, 
@@ -144,12 +144,12 @@ const Page = () => {
           {/* Premium "with Vibe" with luxury styling */}
           <motion.div className="relative">
             <motion.span
-              className="inline-block text-4xl md:text-6xl font-bold tracking-wide"
+              className="inline-block text-3xl sm:text-4xl md:text-6xl font-bold tracking-wide"
               initial={{ opacity: 0, x: -20 }}
               animate={{ opacity: 1, x: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
             >
-              <span className="text-foreground/60 font-light mr-4">with</span>
+              <span className="text-foreground/60 font-light mr-2 sm:mr-4">with</span>
               
               <motion.span
                 className="relative inline-block"
@@ -176,7 +176,7 @@ const Page = () => {
                 
                 {/* Premium floating elements */}
                 <motion.span
-                  className="absolute -top-4 -right-3 text-2xl"
+                  className="absolute -top-3 sm:-top-4 -right-2 sm:-right-3 text-xl sm:text-2xl"
                   animate={{ 
                     scale: [0.8, 1.3, 0.8],
                     opacity: [0.4, 1, 0.4],
@@ -192,7 +192,7 @@ const Page = () => {
                 </motion.span>
                 
                 <motion.span
-                  className="absolute -top-2 -left-4 text-lg opacity-60"
+                  className="absolute -top-1 sm:-top-2 -left-3 sm:-left-4 text-base sm:text-lg opacity-60"
                   animate={{ 
                     scale: [0.6, 1.1, 0.6],
                     opacity: [0.2, 0.8, 0.2],
@@ -255,13 +255,13 @@ const Page = () => {
 
         {/* Simplified subtitle */}
         <motion.div
-          className="text-center"
+          className="text-center px-4"
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 0.8 }}
         >
           <motion.p 
-            className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-4"
+            className="text-base sm:text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed mb-3 sm:mb-4"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 0.8, duration: 0.6 }}
@@ -286,7 +286,7 @@ const Page = () => {
 
         {/* Optimized project form container */}
         <motion.div 
-          className="max-w-3xl mx-auto w-full"
+          className="max-w-3xl mx-auto w-full px-2 sm:px-0"
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.5, delay: 1.2 }}
@@ -305,13 +305,13 @@ const Page = () => {
 
         {/* Simplified scroll indicator */}
         <motion.div
-          className="flex justify-center pt-8"
+          className="flex justify-center pt-6 sm:pt-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.6, duration: 0.4 }}
         >
           <motion.div
-            className="flex items-center gap-3 text-sm text-muted-foreground bg-black/10 dark:bg-white/5 backdrop-blur-sm px-6 py-3 rounded-full border border-white/10"
+            className="flex items-center gap-2 sm:gap-3 text-xs sm:text-sm text-muted-foreground bg-black/10 dark:bg-white/5 backdrop-blur-sm px-4 sm:px-6 py-2 sm:py-3 rounded-full border border-white/10 dark:border-gray-700/30"
             animate={{ y: [0, -3, 0] }}
             transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
             whileHover={{ 
@@ -327,15 +327,16 @@ const Page = () => {
               }}
               transition={{ duration: 2, repeat: Infinity }}
             />
-            <span>Scroll to see your projects</span>
-            <span className="text-base">↓</span>
+            <span className="hidden sm:inline">Scroll to see your projects</span>
+            <span className="sm:hidden">Your projects below</span>
+            <span className="text-sm sm:text-base">↓</span>
           </motion.div>
         </motion.div>
       </motion.section>
 
       {/* What You Can Build Section - More authentic and human */}
       <motion.section
-        className="relative py-16 px-4"
+        className="relative py-12 sm:py-16 px-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8, duration: 0.6 }}
@@ -343,22 +344,22 @@ const Page = () => {
         <div className="relative max-w-4xl mx-auto">
           {/* Simple, honest introduction */}
           <motion.div 
-            className="text-center mb-12"
+            className="text-center mb-8 sm:mb-12"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2, duration: 0.6 }}
           >
-            <h2 className="text-2xl md:text-3xl font-semibold text-white/90 mb-4">
+            <h2 className="text-xl sm:text-2xl md:text-3xl font-semibold text-gray-800 dark:text-white/90 mb-3 sm:mb-4">
               What can you build?
             </h2>
-            <p className="text-white/60 text-lg">
+            <p className="text-gray-600 dark:text-white/60 text-base sm:text-lg">
               Honestly? Pretty much anything. Here are some ideas to get you started.
             </p>
           </motion.div>
 
           {/* Realistic examples */}
           <motion.div
-            className="grid grid-cols-1 md:grid-cols-2 gap-6"
+            className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6"
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 2.2, duration: 0.6 }}
@@ -387,19 +388,19 @@ const Page = () => {
             ].map((item, index) => (
               <motion.div
                 key={item.title}
-                className="group p-6 rounded-xl bg-white/5 border border-white/10 hover:border-white/20 transition-all duration-300"
+                className="group p-4 sm:p-6 rounded-xl bg-white/5 dark:bg-white/5 border border-gray-200/20 dark:border-white/10 hover:border-gray-300/30 dark:hover:border-white/20 transition-all duration-300"
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 2.3 + index * 0.1, duration: 0.4 }}
                 whileHover={{ y: -2 }}
               >
-                <h3 className="font-semibold text-white/90 mb-2 text-lg">
+                <h3 className="font-semibold text-gray-800 dark:text-white/90 mb-2 text-base sm:text-lg">
                   {item.title}
                 </h3>
-                <p className="text-white/70 mb-3 text-sm leading-relaxed">
+                <p className="text-gray-600 dark:text-white/70 mb-2 sm:mb-3 text-sm leading-relaxed">
                   {item.description}
                 </p>
-                <p className="text-white/50 text-xs">
+                <p className="text-gray-500 dark:text-white/50 text-xs">
                   {item.examples}
                 </p>
               </motion.div>
@@ -408,13 +409,13 @@ const Page = () => {
 
           {/* Honest disclaimer */}
           <motion.div
-            className="text-center mt-8"
+            className="text-center mt-6 sm:mt-8"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             transition={{ delay: 2.6, duration: 0.4 }}
           >
-            <p className="text-white/50 text-sm">
-              Still figuring things out? That's okay. Start with something simple and iterate.
+            <p className="text-gray-500 dark:text-white/50 text-sm">
+              Still figuring things out? That&apos;s okay. Start with something simple and iterate.
             </p>
           </motion.div>
         </div>
@@ -422,13 +423,13 @@ const Page = () => {
 
       {/* Integrated Projects Section with smooth transition */}
       <motion.section
-        className="relative pb-8"
+        className="relative pb-6 sm:pb-8"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 2.2, duration: 0.8 }}
       >
         {/* Smooth gradient transition */}
-        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-b from-transparent via-background/50 to-background dark:via-gray-900/50 dark:to-gray-900 pointer-events-none" />
         
         {/* Unified Projects Area */}
         <motion.div

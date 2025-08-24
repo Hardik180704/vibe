@@ -27,11 +27,11 @@ interface TreeViewProps {
 export const TreeView = ({ data, value, onSelect }: TreeViewProps) => {
   return (
     <SidebarProvider>
-      <Sidebar collapsible="none" className="w-full">
-        <SidebarContent>
+      <Sidebar collapsible="none" className="w-full bg-gray-50 dark:bg-gray-800 border-none">
+        <SidebarContent className="bg-transparent">
           <SidebarGroup>
             <SidebarGroupContent>
-              <SidebarMenu>
+              <SidebarMenu className="p-2">
                 {data.map((item, index) => (
                   <Tree
                     key={index}
@@ -45,7 +45,7 @@ export const TreeView = ({ data, value, onSelect }: TreeViewProps) => {
             </SidebarGroupContent>
           </SidebarGroup>
         </SidebarContent>
-        <SidebarRail />
+        <SidebarRail className="bg-gray-200 dark:bg-gray-700" />
       </Sidebar>
     </SidebarProvider>
   );
@@ -69,10 +69,10 @@ const Tree = ({ item, selectedValue, onSelect, parentPath }: TreeProps) => {
     return (
       <SidebarMenuButton
         isActive={isSelected}
-        className="data-[active=true]:bg-transparent"
+        className="data-[active=true]:bg-blue-100 dark:data-[active=true]:bg-blue-900/30 data-[active=true]:text-blue-900 dark:data-[active=true]:text-blue-100 hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300"
         onClick={() => onSelect?.(currentPath)}
       >
-        <FileIcon />
+        <FileIcon className={isSelected ? "text-blue-600 dark:text-blue-400" : "text-gray-500 dark:text-gray-400"} />
         <span className="truncate">
             {name}
         </span>
@@ -88,9 +88,9 @@ const Tree = ({ item, selectedValue, onSelect, parentPath }: TreeProps) => {
            defaultOpen
            >
             <CollapsibleTrigger asChild>
-              <SidebarMenuButton>
-                <ChevronRightIcon className="transition-transform" />
-                <FolderIcon />
+              <SidebarMenuButton className="hover:bg-gray-100 dark:hover:bg-gray-700 text-gray-700 dark:text-gray-300">
+                <ChevronRightIcon className="transition-transform text-gray-500 dark:text-gray-400" />
+                <FolderIcon className="text-blue-500 dark:text-blue-400" />
                 <span className="truncate">
                     {name}
                 </span>
