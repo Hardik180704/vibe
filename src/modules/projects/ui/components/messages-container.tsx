@@ -5,7 +5,7 @@ import { MessageForm } from "./message-form";
 import { useEffect, useRef } from "react";
 import { Fragment } from "@/generated/prisma";
 import { MessageLoading } from "./message-loading";
-import { motion, AnimatePresence, stagger } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Props {
   projectId: string;

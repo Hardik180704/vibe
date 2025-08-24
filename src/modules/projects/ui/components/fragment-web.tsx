@@ -25,7 +25,7 @@ export function FragmentWeb({ data }: Props) {
             await navigator.clipboard.writeText(data.sandboxUrl);
             setCopied(true);
             setTimeout(() => setCopied(false), 2000);
-        } catch (error) {
+  } catch {
             // Fallback for older browsers
             const textArea = document.createElement("textarea");
             textArea.value = data.sandboxUrl;

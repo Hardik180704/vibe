@@ -1,7 +1,7 @@
 "use client";
 import { useRef, useMemo } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
-import { Float, Text } from '@react-three/drei';
+import { Float } from '@react-three/drei';
 import * as THREE from 'three';
 
 function CodeCube({ position, color, delay = 0 }: { position: [number, number, number], color: string, delay?: number }) {
